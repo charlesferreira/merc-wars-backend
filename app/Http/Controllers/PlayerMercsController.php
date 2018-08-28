@@ -3,16 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Player;
-use Illuminate\Http\Request;
 
 class PlayerMercsController extends Controller
 {
+    public function index($playerId)
+    {
+        if ($player = Player::find($playerId))
+            return $player->mercs;
+    }
+
     public function store($playerId)
     {
         $player = Player::find($playerId);
 
-        $player->createMerc(request('name'));
+        $merc = $player->createMerc(request('name'), request('skin'), request('weapon'));
 
-        return response()->json([], 201);
+        return response()->json($merc, 201);
     }
 }

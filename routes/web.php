@@ -1,7 +1,4 @@
 <?php
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::post('/players/{id}/mercs', 'PlayerMercsController@store');
+Route::resource('/players', PlayersController::class);
+Route::resource('/players/{id}/mercs', PlayerMercsController::class);

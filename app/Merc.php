@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Merc extends Model
 {
-    protected $guarded = [];
+    protected $fillable = ['name', 'skin', 'weapon'];
 }

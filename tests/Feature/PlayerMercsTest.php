@@ -20,7 +20,7 @@ class PlayerMercsTest extends TestCase
         $player = factory(Player::class)->create();
 
         // Act
-        $response = $this->postJson("players/{$player->id}/mercs", [
+        $response = $this->postJson("/players/{$player->id}/mercs", [
             'name' => 'Rambo',
             'skin' => 'rambo_skin',
             'weapon' => 'machine_gun'
@@ -38,7 +38,7 @@ class PlayerMercsTest extends TestCase
         $player = factory(Player::class)->create();
 
         // Act
-        $response = $this->getJson("players/{$player->id}/mercs");
+        $response = $this->getJson("/players/{$player->id}/mercs");
 
         // Assert
         $response->assertOk();
@@ -55,7 +55,7 @@ class PlayerMercsTest extends TestCase
         factory(Merc::class)->create(['player_id' => $player->id]);
 
         // Act
-        $response = $this->getJson("players/{$player->id}/mercs");
+        $response = $this->getJson("/players/{$player->id}/mercs");
 
         // Assert
         $response->assertOk();

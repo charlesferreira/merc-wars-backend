@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Player;
+use App\Transformers\PlayerTransformer;
 
 class PlayersController extends Controller
 {
     public function store()
     {
         $player = Player::create(['name' => request('name')]);
+        $data = fractal($player, PlayerTransformer::class)->toArray()['data'];
 
-        return response()->json($player, 201);
+        return response()->json($data, 201);
     }
 
     public function show($playerName)

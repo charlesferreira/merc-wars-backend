@@ -16,9 +16,9 @@ class PlayersController extends Controller
         return response()->json($data, 201);
     }
 
-    public function show($playerName)
+    public function show($playerID)
     {
-        if ($player = Player::whereName($playerName)->first()) {
+        if ($player = Player::whereId($playerID)->first()) {
             $data = fractal($player, PlayerTransformer::class)->toArray()['data'];
             return response()->json($data, 200);
         }

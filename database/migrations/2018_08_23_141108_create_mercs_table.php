@@ -17,8 +17,10 @@ class CreateMercsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('player_id');
             $table->string('name');
-            $table->string('skin');
-            $table->string('weapon');
+            $table->integer('head');
+            $table->integer('color');
+            $table->integer('weapon');
+            $table->integer('headgear')->nullable();
             $table->timestamps();
         });
     }

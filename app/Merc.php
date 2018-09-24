@@ -12,4 +12,9 @@ class Merc extends Model
     {
         return $this->query()->where('player_id', '!=', $this->player_id);
     }
+
+    public function player()
+    {
+        return $this->belongsTo(Player::class);
+    }
 }

@@ -11,14 +11,18 @@ class PlayersController extends Controller
     public function store()
     {
         $player = Player::create(['name' => request('name')]);
+
+        // todo: remover esta chamada
+        $player->create5RandomMercs();
+
         $data = fractal($player, PlayerTransformer::class)->toArray()['data'];
 
         return response()->json($data, 201);
     }
 
-    public function show($playerID)
+    public function show($playerId)
     {
-        if ($player = Player::whereId($playerID)->first()) {
+        if ($player = Player::find($playerId)) {
             $data = fractal($player, PlayerTransformer::class)->toArray()['data'];
             return response()->json($data, 200);
         }

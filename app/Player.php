@@ -28,13 +28,12 @@ class Player extends Model
             'Leodegrance', 'Clinton', 'Wilson', 'Thackeray', 'Perceval', 'Hallewell', 'Arnaldo', 'Stevenson'
         ];
 
-        $shouldHaveHeadgear = rand(0, 100) > 50;
-
         $random = function ($arr) {
             return $arr[rand(0, count($arr) - 1)];
         };
 
         foreach (range(1, 5) as $_) {
+            $shouldHaveHeadgear = rand(0, 100) > 50;
             $this->mercs()->create([
                 'name' => $random($names),
                 'head' => $random(range(1, 9)),

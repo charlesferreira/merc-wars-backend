@@ -21,6 +21,9 @@ class MercTransformer extends TransformerAbstract
             'color' => str_pad($merc->color, 2, '0', STR_PAD_LEFT),
             'weapon' => str_pad($merc->weapon, 2, '0', STR_PAD_LEFT),
             'headgear' => $merc->headgear ? str_pad($merc->headgear, 2, '0', STR_PAD_LEFT) : '',
+            'defense' => (int)$merc->defense,
+            'agility' => (int)$merc->agility,
+            'force' => (int)$merc->force,
             'player_id' => $merc->player()->id,
             'player_name' => $merc->player()->name,
         ];

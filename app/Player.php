@@ -21,9 +21,9 @@ class Player extends Model
     public function create5RandomMercs()
     {
         $names = [
-            'Leigh', 'Bing', 'Gael', 'Churchill', 'Ignatz', 'Appleton', 'Freddy',
+            'Leigh', 'Bing', 'Gael', 'Churchill', 'Ignatz', 'Appleton', 'Freddy', 'Ronaldo', 'Silas',
             'Copeland', 'Urban', 'Sheldon', 'Thorn', 'Penney', 'Boyce', 'Alston', 'Piret', 'Paddle',
-            'Gunter', 'Deighton', 'Melvin', 'Riley', 'Rainier', 'Dukes', 'Wilmot', 'Crawford',
+            'Gunter', 'Deighton', 'Melvin', 'Riley', 'Rainier', 'Dukes', 'Wilmot', 'Crawford', 'Rick',
             'Emmerich', 'Charlton', 'Bergen', 'Atherton', 'Diether', 'Astley', 'Windham', 'Reeve',
             'Leodegrance', 'Clinton', 'Wilson', 'Thackeray', 'Perceval', 'Hallewell', 'Arnaldo', 'Stevenson'
         ];
@@ -41,6 +41,10 @@ class Player extends Model
                 'color' => $random(range(1, 3)),
                 'weapon' => $random(range(1, 5)),
                 'headgear' => $shouldHaveHeadgear ? $random(range(1, 6)) : null,
+                'weapon' => $random(range(1, 5)),
+                'defense' => $random(range(10, 30)),
+                'agility' => $random(range(20, 40)),
+                'force' => $random(range(5, 30)),
             ]);
         }
     }

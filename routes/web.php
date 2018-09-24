@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', function() {
-    return 'It works?';
+    return 'It works';
 });
 Route::resource('/players', PlayersController::class);
 Route::resource('/players/{id}/mercs', PlayerMercsController::class);

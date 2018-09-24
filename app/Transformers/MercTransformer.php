@@ -24,8 +24,8 @@ class MercTransformer extends TransformerAbstract
             'defense' => (int)$merc->defense,
             'agility' => (int)$merc->agility,
             'force' => (int)$merc->force,
-            'player_id' => $merc->player()->id,
-            'player_name' => $merc->player()->name,
+            'player_id' => (int) $merc->player_id,
+            'player_name' => $merc->player->name,
         ];
     }
 }

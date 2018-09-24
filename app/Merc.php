@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Merc extends Model
 {
-    protected $fillable = ['name', 'skin', 'weapon'];
+    protected $guarded = [];
 
     public function teammates()
     {

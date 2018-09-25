@@ -15,6 +15,7 @@ class CreateMatchesTable extends Migration
     {
         Schema::create('matches', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('player_id');
             $table->integer('enemies_killed');
             $table->integer('coins_earned');
             $table->boolean('victory');

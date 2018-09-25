@@ -10,7 +10,7 @@ class GithubController extends Controller
     public function webhook()
     {
         try {
-            $xEvent = request()->header('X-GitHub-Event');
+            $event = request()->header('X-GitHub-Event');
             $payload = json_decode(request()->getContent());
         } catch (Exception $e) {
 
@@ -19,8 +19,8 @@ class GithubController extends Controller
         }
 
         # Check if it's a push event, just in case we register for all events.
-        if ($xEvent != 'push') {
-            Log::info('Ignoring X-GitHub-Event' . $xEvent);
+        if ($event != 'push') {
+            Log::info('Ignoring X-GitHub-Event' . $event);
             return response()->json(['message' => 'ignored non push event'], 200);
         }
 
@@ -28,19 +28,14 @@ class GithubController extends Controller
         if ($payload->ref != 'refs/heads/master') {
             Log::info('Ignoring push on branch' . $payload->ref);
             return response()->json(['message' => 'ignored push to branch :' . $payload->ref], 200);
-
         }
 
-        Log::info('Github Webhook Push Event fired');
         Log::info('Deploying new code because of a commit push by ' . $payload->head_commit->author->name);
         Log::info('Deploying commit ID : ' . $payload->after);
-
         Log::info('Performing git pull');
         Log::info(shell_exec(sprintf('cd %s && /usr/bin/git pull 2>&1', base_path())));
 
         return response()->json(['message' => 'processing push event deploying updates, thanks'], 200);
-
-
     }
 
 }

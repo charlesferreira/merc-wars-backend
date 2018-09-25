@@ -34,8 +34,6 @@ class GithubController extends Controller
         Log::info('Github Webhook Push Event fired');
         Log::info('Deploying new code because of a commit push by ' . $payload->head_commit->author->name);
         Log::info('Deploying commit ID : ' . $payload->after);
-
-
         Log::info('Performing git pull');
         Log::info(shell_exec(sprintf('cd %s && /usr/bin/git pull 2>&1', base_path())));
 

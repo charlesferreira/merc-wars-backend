@@ -37,7 +37,7 @@ class GithubController extends Controller
 
 
         Log::info('Performing git pull');
-        Log::info(/*shell_exec*/(sprintf('cd %s && /usr/bin/git pull 2>&1', base_path())));
+        Log::info(shell_exec(sprintf('cd %s && /usr/bin/git pull 2>&1', base_path())));
 
         return response()->json(['message' => 'processing push event deploying updates, thanks'], 200);
 

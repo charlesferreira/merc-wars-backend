@@ -13,6 +13,11 @@ class Player extends Model
         return $this->hasMany(Merc::class);
     }
 
+    public function matches()
+    {
+        return $this->hasMany(Match::class);
+    }
+
     public function createMerc($name, $skin, $weapon)
     {
         return $this->mercs()->create(compact('name', 'skin', 'weapon'));

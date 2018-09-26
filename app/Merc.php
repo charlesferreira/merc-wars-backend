@@ -20,10 +20,11 @@ class Merc extends Model
 
     public function getHired($price)
     {
-        // TODO: verificar se o merc tem stamina para ser contratado
-        // TODO: descontar stamina do merc
-        // TODO: incrementar o contador de contratações
+        if ($this->stamina <= 0) {
+            return;
+        }
 
+        $this->decrement('stamina')->increment('hiring_count');
 
         $this->player->addCoins($price);
     }

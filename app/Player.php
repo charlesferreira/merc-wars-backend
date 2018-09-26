@@ -14,16 +14,13 @@ class Player extends Model
         return $this->hasMany(Merc::class);
     }
 
-    public function hireMercs($mercsJson)
+    public function payForHiring(HiringDetails $hiringDetails)
     {
-        $mercs = json_decode($mercsJson);
-        if (!is_array($mercs)) {
-            return;
-        }
+        $hiringDetails->items()->map(function ($item) {
+            Merc::find($item->merc_id)->getHired($item->price);
+        });
 
-        foreach ($mercs as $hiringInfo) {
-            Merc::find($hiringInfo->merc_id)->player->increment('coins', $hiringInfo->price);
-        }
+        $this->decrement('coins', $hiringDetails->total());
     }
 
     public function matches()
@@ -36,8 +33,12 @@ class Player extends Model
         return $this->matches()->create();
     }
 
-    public
-        function create5RandomMercs()
+    public function addCoins($amount)
+    {
+        $this->increment('coins', $amount);
+    }
+
+    public function create5RandomMercs()
     {
         $names = [
             'Leigh', 'Bing', 'Gael', 'Churchill', 'Ignatz', 'Appleton', 'Freddy', 'Ronaldo', 'Silas',

@@ -21,7 +21,7 @@ class MatchTransformer extends TransformerAbstract
             'enemies_killed' => (int)$match->enemies_killed,
             'coins_earned' => (int)$match->coins_earned,
             'victory' => (bool)$match->victory,
-            'date' => $match->created_at->toDateString()
+            'date' => $match->updated_at->toDateString()
         ];
     }
 }

@@ -27,6 +27,8 @@ class CreateMercsTable extends Migration
             $table->integer('agility');
             $table->integer('force');
 
+            $table->integer('stamina');
+
             $table->timestamps();
         });
     }

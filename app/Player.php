@@ -14,6 +14,18 @@ class Player extends Model
         return $this->hasMany(Merc::class);
     }
 
+    public function matches()
+    {
+        return $this->hasMany(Match::class);
+    }
+
+    public function startMatch(HiringDetails $hiringDetails)
+    {
+        $this->payForHiring($hiringDetails);
+
+        return $this->matches()->create();
+    }
+
     public function payForHiring(HiringDetails $hiringDetails)
     {
         $hiringDetails->items()->map(function ($item) {
@@ -21,16 +33,6 @@ class Player extends Model
         });
 
         $this->decrement('coins', $hiringDetails->total());
-    }
-
-    public function matches()
-    {
-        return $this->hasMany(Match::class);
-    }
-
-    public function startMatch()
-    {
-        return $this->matches()->create();
     }
 
     public function addCoins($amount)

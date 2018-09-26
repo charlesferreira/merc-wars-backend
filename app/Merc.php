@@ -18,13 +18,25 @@ class Merc extends Model
         return $this->belongsTo(Player::class);
     }
 
+    public function enableForHiring()
+    {
+        // tem que esperar acabar a stamina para
+        // enviar novamente para contratação
+        if ($this->stamina > 0) {
+            return;
+        }
+
+        $this->increment('stamina', 10);
+    }
+
     public function getHired($price)
     {
         if ($this->stamina <= 0) {
             return;
         }
 
-        $this->decrement('stamina')->increment('hiring_count');
+        $this->decrement('stamina');
+        $this->increment('hiring_count');
 
         $this->player->addCoins($price);
     }

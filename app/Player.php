@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use function GuzzleHttp\json_decode;
 
 class Player extends Model
 {
@@ -13,17 +14,30 @@ class Player extends Model
         return $this->hasMany(Merc::class);
     }
 
+    public function hireMercs($mercsJson)
+    {
+        $mercs = json_decode($mercsJson);
+        if (!is_array($mercs)) {
+            return;
+        }
+
+        foreach ($mercs as $hiringInfo) {
+            Merc::find($hiringInfo->merc_id)->player->increment('coins', $hiringInfo->price);
+        }
+    }
+
     public function matches()
     {
         return $this->hasMany(Match::class);
     }
 
-    public function createMerc($name, $skin, $weapon)
+    public function startMatch()
     {
-        return $this->mercs()->create(compact('name', 'skin', 'weapon'));
+        return $this->matches()->create();
     }
 
-    public function create5RandomMercs()
+    public
+        function create5RandomMercs()
     {
         $names = [
             'Leigh', 'Bing', 'Gael', 'Churchill', 'Ignatz', 'Appleton', 'Freddy', 'Ronaldo', 'Silas',

@@ -17,4 +17,9 @@ class Merc extends Model
     {
         return $this->belongsTo(Player::class);
     }
+
+    public function getHired($price)
+    {
+        $this->player->addCoins($price);
+    }
 }

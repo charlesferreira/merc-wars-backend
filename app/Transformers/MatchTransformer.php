@@ -3,7 +3,7 @@
 namespace App\Transformers;
 
 use League\Fractal\TransformerAbstract;
-use PHPUnit\Framework\MockObject\Builder\Match;
+use App\Match;
 
 class MatchTransformer extends TransformerAbstract
 {

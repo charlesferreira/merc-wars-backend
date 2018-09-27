@@ -16,10 +16,10 @@ class MatchTransformer extends TransformerAbstract
     {
         return [
             'id' => (int)$match->id,
-            'player_id' => $match->player_id,
-            'player_name' => $match->player->name,
-            'enemies_killed' => (int)$match->enemies_killed,
-            'coins_earned' => (int)$match->coins_earned,
+            'playerId' => $match->player_id,
+            'playerName' => $match->player->name,
+            'enemiesKilled' => (int)$match->enemies_killed,
+            'coinsEarned' => (int)$match->coins_earned,
             'victory' => (bool)$match->victory,
             'date' => $match->updated_at->toDateString()
         ];

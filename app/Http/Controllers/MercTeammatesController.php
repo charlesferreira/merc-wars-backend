@@ -10,7 +10,7 @@ class MercTeammatesController extends Controller
 {
     public function index($mercId)
     {
-        $teammates = Merc::find($mercId)->teammates;
+        $teammates = Merc::find($mercId)->teammates()->get();
         $data = fractal($teammates, MercTransformer::class)->toArray();
 
         return response()->json($data);

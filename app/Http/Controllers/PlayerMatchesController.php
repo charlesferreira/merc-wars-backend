@@ -6,14 +6,16 @@ use Illuminate\Http\Request;
 use App\Player;
 use App\Transformers\MatchTransformer;
 use App\HiringDetails;
+use App\Match;
 
 class PlayerMatchesController extends Controller
 {
+    /**
+     * Fornece uma lista de partidas do player
+     */
     public function index($playerId)
     {
-        $player = Player::find($playerId);
-
-        if (!$player) {
+        if (!$player = Player::find($playerId)) {
             return response()->json(['error' => 'Player Not Found'], 404);
         }
 
@@ -21,18 +23,35 @@ class PlayerMatchesController extends Controller
         return response()->json($data);
     }
 
+    /**
+     * Cria uma nova partida
+     */
     public function store($playerId)
     {
-        $player = Player::find($playerId);
-
-        if (!$player) {
+        if (!$player = Player::find($playerId)) {
             return response()->json(['error' => 'Player Not Found'], 404);
         }
 
-        $player->payForHiring(new HiringDetails(request()->input('hiringDetails')));
+        $match = $player->startMatch(new HiringDetails(request('hiringDetails')));
+        $data = fractal($match, MatchTransformer::class)->ToArray()['data'];
+        return response()->json($data, 201);
+    }
 
-        $data = fractal($player->startMatch(), MatchTransformer::class)->ToArray()['data'];
+    /**
+     * Processa o fim da partida, atualizando o resultado e pagando o player
+     */
+    public function update($playerId, $matchId)
+    {
+        if (!$player = Player::find($playerId)) {
+            return response()->json(['error' => 'Player Not Found'], 404);
+        }
 
+        if (!$match = $player->matches()->find($matchId)) {
+            return response()->json(['error' => 'Match Not Found'], 404);
+        }
+
+        $match->finish(request()->only(['enemies_killed', 'coins_earned', 'victory']));
+        $data = fractal($match, MatchTransformer::class)->ToArray()['data'];
         return response()->json($data, 201);
     }
 }

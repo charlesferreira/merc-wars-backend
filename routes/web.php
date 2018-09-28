@@ -6,8 +6,9 @@ Route::get('/', function () {
 Route::resource('/players', PlayersController::class);
 Route::resource('/players/{id}/mercs', PlayerMercsController::class);
 Route::resource('/players/{id}/matches', PlayerMatchesController::class);
+Route::resource('/mercs', MercsController::class);
 Route::resource('/mercs/{id}/teammates', MercTeammatesController::class);
 
-Route::post('/players/{player}/mercs/{merc}/send-for-hiring', 'PlayerMercsController@sendForHiring');
+Route::post('/mercs/{merc}/send-for-hiring', 'MercsController@sendForHiring');
 
 Route::post('/github/webhook', 'GithubController@webhook');

@@ -23,6 +23,11 @@ class CreateMercsTable extends Migration
             $table->integer('weapon');
             $table->integer('headgear')->nullable();
 
+            $table->string('feet');
+            $table->string('trunk');
+            $table->string('hand');
+            $table->string('legs');
+
             $table->integer('defense');
             $table->integer('agility');
             $table->integer('force');

@@ -9,6 +9,12 @@ class Player extends Model
 {
     protected $guarded = [];
 
+    public static function randomName()
+    {
+        $randomId = rand(1000, 9999);
+        return sprintf('Commander#%d', $randomId);
+    }
+
     public function mercs()
     {
         return $this->hasMany(Merc::class);

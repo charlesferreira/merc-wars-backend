@@ -10,11 +10,7 @@ class PlayersController extends Controller
 {
     public function store()
     {
-        $player = Player::create(['name' => request('name')]);
-
-        // todo: remover esta chamada
-        $player->create5RandomMercs();
-
+        $player = Player::create(['name' => Player::randomName()]);
         $data = fractal($player, PlayerTransformer::class)->toArray()['data'];
 
         return response()->json($data, 201);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Player;
+use App\Error;
 use App\Transformers\PlayerTransformer;
 
 class PlayersController extends Controller
@@ -23,6 +24,6 @@ class PlayersController extends Controller
             return response()->json($data, 200);
         }
 
-        return response()->json(['error' => 'Player Not Found'], 404);
+        return response()->json(Error::PLAYER_NOT_FOUND, 404);
     }
 }

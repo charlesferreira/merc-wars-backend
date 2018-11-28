@@ -7,6 +7,7 @@ use App\Player;
 use App\Transformers\MatchTransformer;
 use App\HiringDetails;
 use App\Match;
+use App\Error;
 
 class PlayerMatchesController extends Controller
 {
@@ -16,7 +17,7 @@ class PlayerMatchesController extends Controller
     public function index($playerId)
     {
         if (!$player = Player::find($playerId)) {
-            return response()->json(['error' => 'Player Not Found'], 404);
+            return response()->json(Error::PLAYER_NOT_FOUND, 404);
         }
 
         $data = fractal($player->matches, MatchTransformer::class)->toArray();
@@ -29,7 +30,7 @@ class PlayerMatchesController extends Controller
     public function store($playerId)
     {
         if (!$player = Player::find($playerId)) {
-            return response()->json(['error' => 'Player Not Found'], 404);
+            return response()->json(Error::PLAYER_NOT_FOUND, 404);
         }
 
         $match = $player->startMatch(new HiringDetails(request('hiringDetails')));
@@ -43,11 +44,11 @@ class PlayerMatchesController extends Controller
     public function update($playerId, $matchId)
     {
         if (!$player = Player::find($playerId)) {
-            return response()->json(['error' => 'Player Not Found'], 404);
+            return response()->json(Error::PLAYER_NOT_FOUND, 404);
         }
 
         if (!$match = $player->matches()->find($matchId)) {
-            return response()->json(['error' => 'Match Not Found'], 404);
+            return response()->json(Error::MATCH_NOT_FOUND, 404);
         }
 
         $match->finish(request()->only(['enemies_killed', 'coins_earned', 'victory']));

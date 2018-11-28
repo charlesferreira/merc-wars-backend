@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Player;
+use App\Error;
 use App\Transformers\MercTransformer;
 
 class PlayerMercsController extends Controller
@@ -10,7 +11,7 @@ class PlayerMercsController extends Controller
     public function index($playerId)
     {
         if (!$player = Player::find($playerId)) {
-            return response()->json(['error' => 'Player Not Found'], 404);
+            return response()->json(Error::PLAYER_NOT_FOUND, 404);
         }
 
         $data = fractal($player->mercs, MercTransformer::class);

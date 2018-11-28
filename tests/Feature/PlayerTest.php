@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Player;
+use App\Error;
 
 class PlayerTest extends TestCase
 {
@@ -48,6 +49,6 @@ class PlayerTest extends TestCase
 
         // Assert
         $response->assertNotFound();
-        $response->assertExactJson(['error' => 'Player Not Found']);
+        $response->assertExactJson(Error::PLAYER_NOT_FOUND);
     }
 }

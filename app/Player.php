@@ -9,6 +9,12 @@ class Player extends Model
 {
     protected $guarded = [];
 
+    public static function randomName()
+    {
+        $randomId = rand(1000, 9999);
+        return sprintf('Commander#%d', $randomId);
+    }
+
     public function mercs()
     {
         return $this->hasMany(Merc::class);
@@ -54,14 +60,23 @@ class Player extends Model
             return $arr[rand(0, count($arr) - 1)];
         };
 
+        $randomSet = function () use ($random) {
+            return $random(['standard', 'wasteland']);
+        };
+
         foreach (range(1, 5) as $_) {
             $shouldHaveHeadgear = rand(0, 100) > 50;
+
             $this->mercs()->create([
                 'name' => $random($names),
                 'head' => $random(range(1, 9)),
                 'color' => $random(range(1, 3)),
                 'weapon' => $random(range(1, 5)),
                 'headgear' => $shouldHaveHeadgear ? $random(range(1, 6)) : null,
+                'feet' => $randomSet(),
+                'trunk' => $randomSet(),
+                'hand' => $randomSet(),
+                'legs' => $randomSet(),
                 'weapon' => $random(range(1, 5)),
                 'defense' => $random(range(10, 30)),
                 'agility' => $random(range(20, 40)),

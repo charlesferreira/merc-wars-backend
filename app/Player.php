@@ -12,12 +12,17 @@ class Player extends Model
     public static function randomName()
     {
         $randomId = rand(1000, 9999);
-        return sprintf('Commander#%d', $randomId);
+        return sprintf('Commander #%d', $randomId);
     }
 
     public function mercs()
     {
         return $this->hasMany(Merc::class);
+    }
+
+    public function equipments()
+    {
+        return $this->hasMany(Equipment::class);
     }
 
     public function matches()
@@ -46,42 +51,13 @@ class Player extends Model
         $this->increment('coins', $amount);
     }
 
-    public function create5RandomMercs()
+    public function createMerc(array $data)
     {
-        $names = [
-            'Leigh', 'Bing', 'Gael', 'Churchill', 'Ignatz', 'Appleton', 'Freddy', 'Ronaldo', 'Silas',
-            'Copeland', 'Urban', 'Sheldon', 'Thorn', 'Penney', 'Boyce', 'Alston', 'Piret', 'Paddle',
-            'Gunter', 'Deighton', 'Melvin', 'Riley', 'Rainier', 'Dukes', 'Wilmot', 'Crawford', 'Rick',
-            'Emmerich', 'Charlton', 'Bergen', 'Atherton', 'Diether', 'Astley', 'Windham', 'Reeve',
-            'Leodegrance', 'Clinton', 'Wilson', 'Thackeray', 'Perceval', 'Hallewell', 'Arnaldo', 'Stevenson'
-        ];
+        return $this->mercs()->create($data);
+    }
 
-        $random = function ($arr) {
-            return $arr[rand(0, count($arr) - 1)];
-        };
-
-        $randomSet = function () use ($random) {
-            return $random(['standard', 'wasteland']);
-        };
-
-        foreach (range(1, 5) as $_) {
-            $shouldHaveHeadgear = rand(0, 100) > 50;
-
-            $this->mercs()->create([
-                'name' => $random($names),
-                'head' => $random(range(1, 9)),
-                'color' => $random(range(1, 3)),
-                'weapon' => $random(range(1, 5)),
-                'headgear' => $shouldHaveHeadgear ? $random(range(1, 6)) : null,
-                'feet' => $randomSet(),
-                'trunk' => $randomSet(),
-                'hand' => $randomSet(),
-                'legs' => $randomSet(),
-                'weapon' => $random(range(1, 5)),
-                'defense' => $random(range(10, 30)),
-                'agility' => $random(range(20, 40)),
-                'force' => $random(range(5, 30)),
-            ]);
-        }
+    public function createEquipment(array $data)
+    {
+        return $this->equipments()->create($data);
     }
 }

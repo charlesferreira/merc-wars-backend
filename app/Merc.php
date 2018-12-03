@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Merc extends Model
 {
@@ -16,6 +17,28 @@ class Merc extends Model
     public function player()
     {
         return $this->belongsTo(Player::class);
+    }
+
+    public function updateEquipment()
+    {
+        $keys = [
+            'weapon_id',
+            'trunk_id',
+            'legs_id',
+            'hand_id',
+            'feet_id',
+            'headgear_id',
+        ];
+
+        $ids = [];
+        foreach ($keys as $key) {
+            if (empty($this->$key))
+                continue;
+            $ids[] = $this->$key;
+        }
+
+        Equipment::where('merc_id', $this->id)->update(['merc_id' => 1]);
+        Equipment::whereIn('id', $ids)->update(['merc_id' => $this->id]);
     }
 
     public function enableForHiring()

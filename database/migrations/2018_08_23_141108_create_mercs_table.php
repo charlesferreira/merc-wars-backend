@@ -16,17 +16,17 @@ class CreateMercsTable extends Migration
         Schema::create('mercs', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('player_id');
-            $table->string('name');
+            $table->string('name')->nullable();
 
-            $table->integer('head');
             $table->integer('color');
-            $table->integer('weapon');
-            $table->integer('headgear')->nullable();
+            $table->integer('head');
 
-            $table->string('feet');
-            $table->string('trunk');
-            $table->string('hand');
-            $table->string('legs');
+            $table->unsignedInteger('weapon_id')->nullable();
+            $table->unsignedInteger('trunk_id')->nullable();
+            $table->unsignedInteger('legs_id')->nullable();
+            $table->unsignedInteger('hand_id')->nullable();
+            $table->unsignedInteger('feet_id')->nullable();
+            $table->unsignedInteger('headgear_id')->nullable();
 
             $table->integer('defense');
             $table->integer('agility');

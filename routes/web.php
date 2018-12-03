@@ -5,6 +5,7 @@ Route::get('/', function () {
 });
 Route::resource('/players', PlayersController::class);
 Route::resource('/players/{id}/mercs', PlayerMercsController::class);
+Route::resource('/players/{id}/equipments', PlayerEquipmentsController::class);
 Route::resource('/players/{id}/matches', PlayerMatchesController::class);
 Route::resource('/mercs', MercsController::class);
 Route::resource('/mercs/{id}/teammates', MercTeammatesController::class);

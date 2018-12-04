@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Merc;
 use App\Transformers\MercTransformer;
+use App\Equipment;
 
 class MercTeammatesController extends Controller
 {
@@ -18,10 +19,9 @@ class MercTeammatesController extends Controller
 
     public function inventory($mercId)
     {
-        dd("asd");
-        $teammates = Merc::find($mercId)->teammates()->get();
-        $data = fractal($teammates, MercTransformer::class)->toArray();
-
+        $ids = explode(',', request()->input('ids', ''));
+        $equipments = Equipment::whereIn('merc_id', $ids)->get();
+        $data = fractal($equipments, EquipmentTransformer::class);
         return response()->json($data);
     }
 }

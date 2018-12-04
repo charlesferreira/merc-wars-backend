@@ -51,6 +51,11 @@ class Player extends Model
         $this->increment('coins', $amount);
     }
 
+    public function removeCoins($amount)
+    {
+        $this->decrement('coins', $amount);
+    }
+
     public function createMerc(array $data)
     {
         return $this->mercs()->create($data);

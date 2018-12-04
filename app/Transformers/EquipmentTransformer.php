@@ -19,6 +19,7 @@ class EquipmentTransformer extends TransformerAbstract
             'type' => (string)$equip->type,
             'name' => (string)$equip->name,
             'bonus' => (int)$equip->bonus,
+            'price' => (int)$equip->price,
             'playerId' => (int)$equip->player_id,
             'mercId' => (int)$equip->merc_id,
         ];

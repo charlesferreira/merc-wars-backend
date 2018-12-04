@@ -21,6 +21,7 @@ class CreateEquipmentsTable extends Migration
             $table->string('type');
             $table->string('name');
             $table->integer('bonus');
+            $table->integer('price');
 
             $table->timestamps();
         });

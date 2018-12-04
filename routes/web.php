@@ -11,6 +11,7 @@ Route::resource('/mercs', MercsController::class);
 Route::resource('/equipments', EquipmentsController::class);
 Route::resource('/mercs/{id}/teammates', MercTeammatesController::class);
 
+Route::get('/mercs/{id}/teammates-inventory', 'MercTeammatesController@inventory');
 Route::post('/mercs/{merc}/send-for-hiring', 'MercsController@sendForHiring');
 
 Route::post('/github/webhook', 'GithubController@webhook');

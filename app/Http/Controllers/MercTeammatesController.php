@@ -15,4 +15,13 @@ class MercTeammatesController extends Controller
 
         return response()->json($data);
     }
+
+    public function inventory($mercId)
+    {
+        dd("asd");
+        $teammates = Merc::find($mercId)->teammates()->get();
+        $data = fractal($teammates, MercTransformer::class)->toArray();
+
+        return response()->json($data);
+    }
 }

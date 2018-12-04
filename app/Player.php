@@ -12,7 +12,7 @@ class Player extends Model
     public static function randomName()
     {
         $randomId = rand(1000, 9999);
-        return sprintf('Commander #%d', $randomId);
+        return sprintf('Player #%d', $randomId);
     }
 
     public function mercs()

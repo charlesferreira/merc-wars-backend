@@ -11,7 +11,7 @@ class PlayersController extends Controller
 {
     public function store()
     {
-        $player = Player::create(['name' => Player::randomName()]);
+        $player = Player::create(['name' => Player::randomName(), 'coins' => 0]);
         $data = fractal($player, PlayerTransformer::class)->toArray()['data'];
 
         return response()->json($data, 201);

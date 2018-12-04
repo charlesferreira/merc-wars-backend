@@ -23,6 +23,7 @@ class PlayerEquipmentsController extends Controller
         $player = Player::find($playerId);
 
         $equipment = $player->createEquipment(request()->all());
+        $player->removeCoins($equipment->price);
         $data = fractal($equipment, EquipmentTransformer::class)->ToArray()['data'];
 
         return response()->json($data, 201);

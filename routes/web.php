@@ -11,6 +11,7 @@ Route::resource('/mercs', MercsController::class);
 Route::resource('/equipments', EquipmentsController::class);
 Route::resource('/mercs/{id}/teammates', MercTeammatesController::class);
 
+Route::post('/players/{id}/add-coins/{coins}', 'PlayersController@addCoins');
 Route::get('/mercs/{id}/teammates-inventory', 'MercTeammatesController@inventory');
 Route::post('/mercs/{merc}/send-for-hiring', 'MercsController@sendForHiring');
 

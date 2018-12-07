@@ -26,4 +26,15 @@ class PlayersController extends Controller
 
         return response()->json(Error::PLAYER_NOT_FOUND, 404);
     }
+
+    public function addCoins($playerId, $coins)
+    {
+        if ($player = Player::find($playerId)) {
+            $player->increment('coins', $coins);
+            $data = fractal($player, PlayerTransformer::class)->toArray()['data'];
+            return response()->json($data, 200);
+        }
+
+        return response()->json(Error::PLAYER_NOT_FOUND, 404);
+    }
 }

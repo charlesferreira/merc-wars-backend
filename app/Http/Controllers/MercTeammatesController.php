@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Merc;
 use App\Transformers\MercTransformer;
 use App\Equipment;
+use App\Transformers\EquipmentTransformer;
 
 class MercTeammatesController extends Controller
 {

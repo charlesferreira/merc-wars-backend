@@ -62,5 +62,6 @@ class Merc extends Model
         $this->increment('hiring_count');
 
         $this->player->addCoins($price);
+        $this->player->increment('contracts');
     }
 }

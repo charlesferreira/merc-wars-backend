@@ -21,9 +21,11 @@ class PlayerEquipmentsController extends Controller
     public function store($playerId)
     {
         $player = Player::find($playerId);
+        $equipment = $player->createEquipment(request()->post());
 
-        $equipment = $player->createEquipment(request()->all());
-        $player->removeCoins($equipment->price);
+        if (!request()->input(('isFreebie'))) {
+            $player->removeCoins($equipment->price);
+        }
         $data = fractal($equipment, EquipmentTransformer::class)->ToArray()['data'];
 
         return response()->json($data, 201);

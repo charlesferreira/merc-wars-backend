@@ -11,7 +11,7 @@ class Merc extends Model
 
     public function teammates()
     {
-        return $this->query()->where('player_id', '!=', $this->player_id);
+        return $this->query()->where('player_id', '!=', $this->player_id)->where('stamina', '>', 0);
     }
 
     public function player()
@@ -49,7 +49,7 @@ class Merc extends Model
             return;
         }
 
-        $this->increment('stamina', 10);
+        $this->increment('stamina', 100);
     }
 
     public function getHired($price)

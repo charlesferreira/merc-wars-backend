@@ -17,6 +17,17 @@ class PlayersController extends Controller
         return response()->json($data, 201);
     }
 
+    public function update($playerId)
+    {
+        if (!$player = Player::find($playerId)) {
+            return response()->json(Error::PLAYER_NOT_FOUND, 404);
+        }
+
+        $player->update(request()->post());
+        $data = fractal($player, PlayerTransformer::class);
+        return response()->json($data);
+    }
+
     public function show($playerId)
     {
         if ($player = Player::find($playerId)) {

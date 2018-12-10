@@ -14,6 +14,7 @@ class Merc extends Model
         return $this->query()
             ->where('player_id', '!=', $this->player_id)
             ->whereNotNull('name')
+            ->where('feet_id', '>', 0)
             ->where('stamina', '>', 0);
     }
 

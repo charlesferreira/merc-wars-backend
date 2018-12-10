@@ -11,7 +11,10 @@ class Merc extends Model
 
     public function teammates()
     {
-        return $this->query()->where('player_id', '!=', $this->player_id)->where('stamina', '>', 0);
+        return $this->query()
+            ->where('player_id', '!=', $this->player_id)
+            ->whereNotNull('name')
+            ->where('stamina', '>', 0);
     }
 
     public function player()
